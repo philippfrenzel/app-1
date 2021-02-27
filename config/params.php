@@ -13,14 +13,19 @@ return [
     'app' => [
         'charset' => 'UTF-8',
         'locale' => 'en',
-        'name' => 'My Project',
+        'name' => 'Tropfen App',
+    ],
+
+    'yiisoft/yii-db-migration' => [
+        'createNamespace' => 'App\\Migration',
+        'updateNamespace' => ['App\\Migration'],
     ],
 
     'yiisoft/aliases' => [
         'aliases' => [
             '@root' => dirname(__DIR__),
             '@assets' => '@root/public/assets',
-            '@assetsUrl' => '/assets',
+            '@assetsUrl' => '@baseUrl/assets',
             '@npm' => '@root/node_modules',
             '@public' => '@root/public',
             '@resources' => '@root/resources',
@@ -28,6 +33,11 @@ return [
             '@views' => '@root/resources/views',
             '@message' => '@root/resources/message',
         ],
+    ],
+
+    'yiisoft/db-sqlite' => [
+        'dsn' => 'sqlite:'. dirname(__DIR__) .'/runtime/data/tropfendb.db',
+        //'dsn' => 'sqlite:@runtime/data/tropfendb.db',
     ],
 
     'yiisoft/view' => [
@@ -56,6 +66,12 @@ return [
 
     'yiisoft/router' => [
         'enableCache' => false,
+    ],
+
+    'yiisoft/user' => [
+        'cookieLogin' => [
+            'addCookie' => true,
+        ],
     ],
 
     ReverseBlockMerge::class => new ReverseBlockMerge(),

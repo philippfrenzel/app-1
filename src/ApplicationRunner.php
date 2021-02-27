@@ -12,6 +12,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Log\NullLogger;
 use Throwable;
 use Yiisoft\Composer\Config\Builder;
+use Yiisoft\Db\Connection\ConnectionInterface;
 use Yiisoft\Di\Container;
 use Yiisoft\ErrorHandler\ErrorHandler;
 use Yiisoft\ErrorHandler\Middleware\ErrorCatcher;
@@ -55,7 +56,7 @@ final class ApplicationRunner
 
         $container = $container->get(ContainerInterface::class);
         $application = $container->get(Application::class);
-
+        
         $request = $container->get(ServerRequestFactory::class)->createFromGlobals();
         $request = $request->withAttribute('applicationStartTime', $startTime);
 
