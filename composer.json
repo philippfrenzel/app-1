@@ -21,6 +21,7 @@
         "httpsoft/http-message": "^1.0.5",
         "yii-extension/user": "@dev",
         "yii-extension/user-view-bootstrap5": "@dev",
+        "yii-extension/fontawesome": "@dev",
         "yiisoft/aliases": "^1.1.0",
         "yiisoft/assets": "@dev",
         "yiisoft/active-record": "@dev",

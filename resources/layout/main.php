@@ -2,7 +2,11 @@
 
 declare(strict_types=1);
 
+//Assets
 use App\Asset\AppAsset;
+use Yii\Extension\Fontawesome\Cdn\Css\CdnAllAsset;
+
+//Other
 use App\Widget\PerformanceMetrics;
 use Yiisoft\I18n\Locale;
 use Yiisoft\Form\Widget\Form;
@@ -26,6 +30,7 @@ use Yiisoft\Yii\Bootstrap5\NavBar;
 
 $assetManager->register([
     AppAsset::class
+    ,CdnAllAsset::class
 ]);
 
 $this->setCssFiles($assetManager->getCssFiles());
@@ -54,9 +59,9 @@ $currentRoute = $urlMatcher->getCurrentRoute() === null ? '' : $urlMatcher->getC
 $this->beginBody();
 
 echo NavBar::widget()
-      ->brandLabel($brandLabel)
-      ->brandUrl($urlGenerator->generate('site/index'))
-      ->options(['class' => 'navbar navbar-light bg-light navbar-expand-sm text-white'])
+      ->brandLabel(Html::tag('i','',['class' => 'fas fa-tint']) . ' ' . $brandLabel)
+      ->brandUrl($urlGenerator->generate('home'))
+      ->options(['class' => 'navbar navbar-light navbar-expand-sm text-black', "style" => "background-color: #81A69E;"])
       ->begin();
 echo Nav::widget()
         ->currentPath($currentRoute)
@@ -71,29 +76,37 @@ echo Nav::widget()
             ]
         );
 
-echo Nav::widget()
-        ->currentPath($currentRoute)
+        echo Nav::widget()
+        ->currentPath($urlMatcher->getCurrentUri()->getPath())
         ->options(['class' => 'navbar-nav'])
         ->items(
             $user->getId() === null
                 ? [
-                ['label' => 'Login', 'url' => $urlGenerator->generate('login')],
-                ['label' => 'Signup', 'url' => $urlGenerator->generate('register')],
+                [
+                    'label' => Html::tag('i','',['class' => 'fas fa-sign-in-alt']) . ' Login'
+                    , 'url' => $urlGenerator->generate('login')
+                    , 'encode' => false
+                ],
+                [
+                    'label' => Html::tag('i','',['class' => 'fas fa-plus']) . ' Signup'
+                    , 'url' => $urlGenerator->generate('register')
+                    , 'encode' => false
+                ],
             ]
                 : [Form::widget()
                     ->action($urlGenerator->generate('logout'))
                     ->options(['csrf' => $csrf])
                     ->begin()
-                    . Html::submitButton('Logout (' . Html::encode($user->getLogin()) . ')', ['class' => 'dropdown-item'])
+                    . Html::submitButton(' Logout (' . Html::encode($user->getId()) . ')', ['class' => 'dropdown-item fas fa-sign-out-alt'])
                     . Form::end()],
         );
 echo NavBar::end();
 
-?><main class="container py-4"><?php
+?><main class="container mt-5 mb-5"><?php
 echo $content;
 ?></main>
 
-<footer class="container py-4">
+<footer class="container-fluid bg-info align-bottom mt-50">
     <?= PerformanceMetrics::widget() ?>
 </footer>
 <?php

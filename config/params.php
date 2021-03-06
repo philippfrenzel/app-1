@@ -47,6 +47,7 @@ return [
     'yiisoft/yii-console' => [
         'commands' => [
             'hello' => Hello::class,
+            'user/create' => App\User\Console\CreateCommand::class,
         ],
     ],
 

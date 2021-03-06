@@ -9,7 +9,7 @@ use Yiisoft\Router\Route;
 return [
     // Lonely pages of site
     Route::get('/', [SiteController::class, 'index'])
-        ->name('site/index'),
-    //Route::get('/', [SiteController::class, 'index'])->name('home'),
+        ->name('home'),
+    
     ReverseBlockMerge::class => new ReverseBlockMerge(),
 ];

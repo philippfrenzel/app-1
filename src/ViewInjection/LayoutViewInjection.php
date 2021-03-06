@@ -10,7 +10,8 @@ use Yiisoft\I18n\Locale;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Router\UrlMatcherInterface;
 use Yiisoft\Yii\View\LayoutParametersInjectionInterface;
-use Yiisoft\User\CurrentUser;
+//use Yiisoft\User\CurrentUser;
+use Yii\Extension\User\ActiveRecord\User as CurrentUser;
 
 final class LayoutViewInjection implements LayoutParametersInjectionInterface
 {
@@ -43,7 +44,7 @@ final class LayoutViewInjection implements LayoutParametersInjectionInterface
             'applicationParameters' => $this->applicationParameters,
             'brandLabel' => 'Tropfen',
             'assetManager' => $this->assetManager,
-            'user' => $this->currentUser->getIdentity(),
+            'user' => $this->currentUser, //->getIdentity(),
             'locale' => $this->locale,
             'urlGenerator' => $this->urlGenerator,
             'urlMatcher' => $this->urlMatcher,
